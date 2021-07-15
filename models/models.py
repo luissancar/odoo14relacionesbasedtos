@@ -30,6 +30,9 @@ class alumno(models.Model):
 	name = fields.Char('DNI',required=True)
 	nombre = fields.Char(string='Nombre',required=True)
 
+	#relaciones
+	tutor_id=fields.Many2one('relaciones.tutor',string='tutor')
+
 
 
 class asignatura(models.Model):
@@ -38,6 +41,8 @@ class asignatura(models.Model):
 
 	name = fields.Char('Código',required=True)
 	nombre = fields.Char(string='Asignatura',required=True)
+	# relaciones
+	tutor_ids=fields.Many2many('relaciones.tutor',string='Profesor')
 
 
 
@@ -47,3 +52,6 @@ class tutor(models.Model):
 
 	name = fields.Char('DNI',required=True)
 	nombre = fields.Char(string='Tutor',required=True)
+	# relaciones
+	alumnos_ids = fields.One2many('relaciones.alumno','tutor_id',string='Alumno tutoria')
+	asignatura_ids=fields.Many2many('relaciones.asignatura','Asignatura')
