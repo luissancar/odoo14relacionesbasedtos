@@ -50,8 +50,8 @@ class tutor(models.Model):
 	_name = 'relaciones.tutor'
 	_description = 'model tutor'
 
-	name = fields.Char('DNI',required=True)
-	nombre = fields.Char(string='Tutor',required=True)
+	name = fields.Char('Nombre',required=True)
+	dni = fields.Char(string='DNI',required=True)
 	# relaciones
 	alumnos_ids = fields.One2many('relaciones.alumno','tutor_id',string='Alumno tutoria')
 	asignatura_ids=fields.Many2many('relaciones.asignatura','Asignatura')

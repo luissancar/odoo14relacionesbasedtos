@@ -1,60 +1,184 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="relaciones.list">
-      <field name="name">relaciones list</field>
-      <field name="model">relaciones.relaciones</field>
+
+    <!-- Vistas de alumno-->
+
+    <record model="ir.ui.view" id="relaciones.alumno_list_view">
+      <field name="name">relaciones.alumno.view.tree</field>
+      <field name="model">relaciones.alumno</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+          <field name="nombre"/>
+          <field name="tutor_id" />
         </tree>
       </field>
     </record>
--->
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="relaciones.action_window">
-      <field name="name">relaciones window</field>
-      <field name="res_model">relaciones.relaciones</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
+<!-- search -->
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="relaciones.action_server">
-      <field name="name">relaciones server</field>
-      <field name="model_id" ref="model_relaciones_relaciones"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
+    <record model="ir.ui.view" id="relaciones.alumno_search_view">
+      <field name="name">relaciones.alumno.view.search</field>
+      <field name="model">relaciones.alumno</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="nombre"/>
+          <field name="tutor_id" />
+          <group>
+            <filter name="group_by_nombre" string="nombre" context="{'gropup_by':'nombre'}" />
+          </group>
+        </search>
       </field>
     </record>
--->
 
-    <!-- Top menu item -->
-<!--
+
+    <!-- form -->
+
+    <record model="ir.ui.view" id="relaciones.alumno_form_view">
+      <field name="name">relaciones.alumno.view.form</field>
+      <field name="model">relaciones.alumno</field>
+      <field name="arch" type="xml">
+        <form string="Información alumno">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                DNI <field name="name" placeholder="dni"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="nombre" placeholder="nombre"/>
+
+          <field name="tutor_id" />
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
+
+
+
+
+
+
+
+
+    <!-- Definición de menús-->
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="relaciones.alumno_action_window">
+      <field name="name">alumnos</field>
+      <field name="res_model">relaciones.alumno</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    
+    
+    
+    <!-- vista tutor -->
+    
+    <record model="ir.ui.view" id="relaciones.tutor_list_view">
+      <field name="name">relaciones.tutor.view.tree</field>
+      <field name="model">relaciones.tutor</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="dni"/>
+          <field name="alumnos_ids" />
+        </tree>
+      </field>
+    </record>
+
+<!-- search -->
+
+    <record model="ir.ui.view" id="relaciones.tutor_search_view">
+      <field name="name">relaciones.tutor.view.search</field>
+      <field name="model">relaciones.tutor</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="dni"/>
+          <field name="alumnos_ids" />
+          <group>
+            <filter name="group_by_nombre" string="nombre" context="{'gropup_by':'nombre'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <!-- form -->
+
+    <record model="ir.ui.view" id="relaciones.tutor_form_view">
+      <field name="name">relaciones.tutor.view.form</field>
+      <field name="model">relaciones.tutor</field>
+      <field name="arch" type="xml">
+        <form string="Información tutor">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                Nombre <field name="name" placeholder="nombre"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="dni" placeholder="dni"/>
+
+          <field name="alumnos_ids" />
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
+
+
+
+
+
+
+
+
+    <!-- Definición de menús-->
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="relaciones.tutor_action_window">
+      <field name="name">Tutores</field>
+      <field name="res_model">relaciones.tutor</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="relaciones.alumno_action_window">
+      <field name="name">alumnos</field>
+      <field name="res_model">relaciones.alumno</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    
+    <!--                 -->
+
     <menuitem name="relaciones" id="relaciones.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="relaciones.menu_1" parent="relaciones.menu_root"/>
-    <menuitem name="Menu 2" id="relaciones.menu_2" parent="relaciones.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="relaciones.menu_1_list" parent="relaciones.menu_1"
-              action="relaciones.action_window"/>
-    <menuitem name="Server to list" id="relaciones" parent="relaciones.menu_2"
-              action="relaciones.action_server"/>
--->
+    <menuitem name="alumnos" id="relaciones.menu_alumno" parent="relaciones.menu_root"/>
+
+
+    <menuitem name="Tutors" id="relaciones.menu_tutor" parent="relaciones.menu_root"/>
+
+    <menuitem name="List" id="relaciones.menu_alumno_list" parent="relaciones.menu_alumno"
+              action="relaciones.alumno_action_window"/>
+
+
+    <menuitem name="List" id="relaciones.menu_tutor_list" parent="relaciones.menu_tutor"
+              action="relaciones.tutor_action_window"/>
+
+
   </data>
 </odoo>
