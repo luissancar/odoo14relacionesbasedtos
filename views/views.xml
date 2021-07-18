@@ -90,6 +90,7 @@
           <field name="name"/>
           <field name="dni"/>
           <field name="alumnos_ids" />
+          <field name="asignatura_ids" />
         </tree>
       </field>
     </record>
@@ -104,6 +105,7 @@
           <field name="name"/>
           <field name="dni"/>
           <field name="alumnos_ids" />
+          <field name="asignatura_ids" />
           <group>
             <filter name="group_by_nombre" string="nombre" context="{'gropup_by':'nombre'}" />
           </group>
@@ -130,7 +132,9 @@
                 <separator string="Datos"/>
                 <field name="dni" placeholder="dni"/>
 
-          <field name="alumnos_ids" />
+                <field name="alumnos_ids" />
+
+                <field name="asignatura_ids" />
               </group>
             </group>
           </sheet>
@@ -140,6 +144,68 @@
     </record>
 
 
+
+
+<!-- Vista asignatura  -->
+    
+    
+        
+    <record model="ir.ui.view" id="relaciones.asignatura_list_view">
+      <field name="name">relaciones.asignatura.view.tree</field>
+      <field name="model">relaciones.asignatura</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="nombre"/>
+          <field name="tutor_ids" />
+        </tree>
+      </field>
+    </record>
+
+<!-- search -->
+
+    <record model="ir.ui.view" id="relaciones.asignatura_search_view">
+      <field name="name">relaciones.asignatura.view.search</field>
+      <field name="model">relaciones.asignatura</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="nombre"/>
+          <field name="tutor_ids" />
+          <group>
+            <filter name="group_by_nombre" string="nombre" context="{'gropup_by':'nombre'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <!-- form -->
+
+    <record model="ir.ui.view" id="relaciones.asignatura_form_view">
+      <field name="name">relaciones.asignatura.view.form</field>
+      <field name="model">relaciones.asignatura</field>
+      <field name="arch" type="xml">
+        <form string="Información asignatura">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                Código <field name="name" placeholder="codigo"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="nombre" placeholder="nombre"/>
+
+                <field name="tutor_ids" />
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
 
 
 
@@ -163,21 +229,28 @@
       <field name="view_mode">tree,form</field>
     </record>
 
+
+    <record model="ir.actions.act_window" id="relaciones.asignatura_action_window">
+      <field name="name">asignatura</field>
+      <field name="res_model">relaciones.asignatura</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
     
     <!--                 -->
 
     <menuitem name="relaciones" id="relaciones.menu_root"/>
-    <menuitem name="alumnos" id="relaciones.menu_alumno" parent="relaciones.menu_root"/>
 
+      <menuitem name="Alumnos" id="relaciones.menu_alumno" parent="relaciones.menu_root"/>
+      <menuitem name="Tutores" id="relaciones.menu_tutor" parent="relaciones.menu_root"/>
+      <menuitem name="Asignaturas" id="relaciones.menu_asignatura" parent="relaciones.menu_root"/>
 
-    <menuitem name="Tutors" id="relaciones.menu_tutor" parent="relaciones.menu_root"/>
-
-    <menuitem name="List" id="relaciones.menu_alumno_list" parent="relaciones.menu_alumno"
+      <menuitem name="List" id="relaciones.menu_alumno_list" parent="relaciones.menu_alumno"
               action="relaciones.alumno_action_window"/>
-
-
-    <menuitem name="List" id="relaciones.menu_tutor_list" parent="relaciones.menu_tutor"
+      <menuitem name="List" id="relaciones.menu_tutor_list" parent="relaciones.menu_tutor"
               action="relaciones.tutor_action_window"/>
+      <menuitem name="List" id="relaciones.menu_asignatura_list" parent="relaciones.menu_asignatura"
+              action="relaciones.asignatura_action_window"/>
 
 
   </data>
