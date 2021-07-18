@@ -47,6 +47,7 @@ class asignatura(models.Model):
 
 
 
+
 class tutor(models.Model):
 	_name = 'relaciones.tutor'
 	_description = 'model tutor'
